@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/dynamic-common.js</title>
+    <title>JSDoc: Tutorial: static-badges</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,121 +17,30 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/dynamic-common.js</h1>
+    <h1 class="page-title">Tutorial: static-badges</h1>
 
-    
-
-
-
-    
     <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Common functions and utilities for tasks related to dynamic badges.
- *
- * @module
- */
 
-import Joi from 'joi'
-import toArray from '../core/base-service/to-array.js'
-import validate from '../core/base-service/validate.js'
-import { InvalidResponse } from './index.js'
+<header>
+    
 
-/**
- * Map of error codes and their corresponding error messages.
- *
- * @type {object}
- */
-const errorMessages = {
-  404: 'resource not found',
-}
+    <h2>static-badges</h2>
+</header>
 
-/**
- * Joi schema for validating individual value.
- * Checks if the individual value is of type string or number.
- *
- * @type {Joi}
- */
-const individualValueSchema = Joi.alternatives()
-  .try(Joi.string(), Joi.number())
-  .required()
+<article>
+    <h1>Static Badges</h1>
+<p>It is possible to use shields.io to make a wide variety of badges displaying static text and/or logos. For example:</p>
+<ul>
+<li><img src="https://img.shields.io/badge/any%20text-you%20like-blue" alt="any text you like"> - https://img.shields.io/badge/any%20text-you%20like-blue</li>
+<li><img src="https://img.shields.io/badge/just%20the%20message-8A2BE2" alt="just the message"> - https://img.shields.io/badge/just%20the%20message-8A2BE2</li>
+<li><img src="https://img.shields.io/badge/%27for%20the%20badge%27%20style-20B2AA?style=for-the-badge" alt="'for the badge' style"> - https://img.shields.io/badge/%27for%20the%20badge%27%20style-20B2AA?style=for-the-badge</li>
+<li><img src="https://img.shields.io/badge/with%20a%20logo-grey?style=for-the-badge&amp;logo=javascript" alt="with a logo"> - https://img.shields.io/badge/with%20a%20logo-grey?style=for-the-badge&amp;logo=javascript</li>
+</ul>
+<p>Full documentation of styles and parameters: https://shields.io/#styles</p>
+<p>More documentation on logos: https://github.com/badges/shields/blob/master/doc/logos.md</p>
+</article>
 
-/**
- * Joi schema for validating compound value.
- * Checks if the compound value is of type individualValueSchema, array of individualValueSchema or empty array.
- *
- * @type {Joi}
- */
-const compoundValueSchema = Joi.alternatives().try(
-  individualValueSchema,
-  Joi.array().items(individualValueSchema).required(),
-  Joi.array().length(0)
-)
-
-/**
- * Look up the value in the data object by key and validate the value against compoundValueSchema.
- *
- * @param {object} attrs Refer to individual attributes
- * @param {object} attrs.data Object containing the data for validation
- * @param {string} attrs.key Key to retrieve the data from object for validation
- * @throws {InvalidResponse|Error} Error if Joi validation fails due to invalid or no schema
- * @returns {object} Value if Joi validation is success
- */
-function transformAndValidate({ data, key }) {
-  return validate(
-    {
-      ErrorClass: InvalidResponse,
-      prettyErrorMessage: 'invalid key value',
-      traceErrorMessage: 'Key value not valid for dynamic badge',
-      traceSuccessMessage: 'Key value after validation',
-    },
-    data[key],
-    compoundValueSchema
-  )
-}
-
-/**
- * Handles rendering concerns of dynamic badges.
- * Determines the label of the badge according to the tag and defaultLabel.
- * Determines the message of the badge according to the prefix, suffix and value.
- * Sets the color of the badge to blue.
- *
- * @param {object} attrs Refer to individual attributes
- * @param {string} attrs.defaultLabel default badge label
- * @param {string} [attrs.tag] If provided then this value will be appended to the badge label, e.g. `foobar@v1.23`
- * @param {any} attrs.value Value or array of value to be used for the badge message
- * @param {string} [attrs.prefix] If provided then the badge message will use this value as a prefix
- * @param {string} [attrs.suffix] If provided then the badge message will use this value as a suffix
- * @returns {object} Badge with label, message and color properties
- */
-function renderDynamicBadge({
-  defaultLabel,
-  tag,
-  value,
-  prefix = '',
-  suffix = '',
-}) {
-  const renderedValue =
-    value === undefined ? 'not specified' : toArray(value).join(', ')
-  return {
-    label: tag ? `${defaultLabel}@${tag}` : defaultLabel,
-    message: `${prefix}${renderedValue}${suffix}`,
-    color: 'blue',
-  }
-}
-
-export {
-  errorMessages,
-  individualValueSchema,
-  transformAndValidate,
-  renderDynamicBadge,
-}
-</code></pre>
-        </article>
-    </section>
-
-
-
+</section>
 
 </div>
 
@@ -142,7 +51,7 @@ export {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Dec 19 2022 15:55:08 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Dec 19 2022 15:55:09 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
